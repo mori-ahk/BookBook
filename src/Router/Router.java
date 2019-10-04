@@ -27,12 +27,10 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
         if(server.getServerName().equals(clientRequest.getDestination().name())) {
             //call the local server
             result = server.addAppointment(clientRequest);
-            System.out.println(result.toString());
         } else {
             //call udp server
             setupUDPServer(clientRequest);
             result  = udpServer.sendRequest(clientRequest);
-            System.out.println(result.toString());
         }
         return result;
     }
