@@ -73,7 +73,23 @@ public class Server {
     }
 
     public Result bookAppointment(Request request) {
-        return null;
+        Client patient = new Client(request.getPatientID());
+        Appointment appointment = request.getAppointment();
+        AppointmentType appointmentType = appointment.getAppointmentType();
+        String appointmentID = appointment.getID();
+        if(database.containsKey(appointmentType)) {
+            if(database.get(appointmentType).containsKey(appointmentID)) {
+                if(database.get(appointmentType).get(appointmentID).getMaxCapacity() >
+                        database.get(appointmentType).get(appointmentID).getPatients().size()) {
+                    database.get(appointmentType).get(appointmentID).addPatient(patient);
+                    return new Result(ResultStatus.SUCCESS);
+                } else { return new Result(ResultStatus.FAILURE); }
+            } else {
+                return new Result(ResultStatus.FAILURE);
+            }
+        } else {
+            return new Result(ResultStatus.FAILURE);
+        }
     }
 
     public Result getAppointmentSchedule(Request request) {

@@ -91,7 +91,7 @@ public class MainServer {
         value.put("SHEM051019", new Appointment(AppointmentType.DENTAL, "SHEM051019", 2));
         database.put(AppointmentType.DENTAL, value);
         value = new HashMap<>();
-        value.put("SHEM051019", new Appointment(AppointmentType.PHYSICIAN, "SHEE150219", 2));
+        value.put("SHEE150219", new Appointment(AppointmentType.PHYSICIAN, "SHEE150219", 2));
         database.put(AppointmentType.PHYSICIAN, value);
         return database;
     }

@@ -148,6 +148,7 @@ public class MainClient {
     }
 
     private static void parseResult(Result result) {
+        if(result == null) return;
         System.out.println(result.getMessage());
         System.out.println(result.toString());
         if(result.getPayload() != null) {

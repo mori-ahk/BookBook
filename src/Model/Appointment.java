@@ -1,11 +1,12 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Appointment implements Serializable {
     AppointmentType appointmentType;
     String ID;
-    Client[] patients;
+    ArrayList<Client> patients;
     int maxCapacity;
     int currentCapacity;
 
@@ -20,6 +21,8 @@ public class Appointment implements Serializable {
         this.location = ID.substring(0, 3);
         this.appointmentStatus = initAppointmentStatus(ID);
         this.date = ID.substring(4);
+        this.patients = new ArrayList<>();
+        this.currentCapacity = maxCapacity - patients.size();
     }
 
     public Appointment(AppointmentType appointmentType, String ID) {
@@ -28,10 +31,14 @@ public class Appointment implements Serializable {
         this.location = ID.substring(0, 3);
         this.appointmentStatus = initAppointmentStatus(ID);
         this.date = ID.substring(4);
+        this.patients = new ArrayList<>();
+        this.currentCapacity = maxCapacity - patients.size();
     }
 
     public Appointment(AppointmentType appointmentType) {
         this.appointmentType = appointmentType;
+        this.patients = new ArrayList<>();
+        this.currentCapacity = maxCapacity - patients.size();
     }
 
     public String getLocation() {
@@ -62,14 +69,18 @@ public class Appointment implements Serializable {
         this.ID = ID;
     }
 
-    public Client[] getPatients() {
+    public ArrayList<Client> getPatients() {
         return patients;
     }
 
-    public void setPatients(Client[] patients) {
+    public void setPatients(ArrayList<Client> patients) {
         this.patients = patients;
     }
 
+    public void addPatient(Client patient) {
+        patients.add(patient);
+        currentCapacity = maxCapacity - patients.size();
+    }
     public int getMaxCapacity() {
         return maxCapacity;
     }
@@ -105,6 +116,7 @@ public class Appointment implements Serializable {
                 "appointmentType = " + appointmentType +
                 ", ID = '" + ID + '\'' +
                 ", maxCapacity = " + maxCapacity +
+                ", currentCapacity = " + currentCapacity +
                 ", appointmentStatus = " + appointmentStatus +
                 '}';
     }
