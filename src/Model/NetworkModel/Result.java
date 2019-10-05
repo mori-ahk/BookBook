@@ -12,11 +12,13 @@ public class Result implements Serializable {
     private ResultStatus resultStatus;
     private String ID;
     private List<Appointment> payload;
+    private String message;
 
     public Result(ResultStatus resultStatus, String ID, List<Appointment> response) {
         this.resultStatus = resultStatus;
         this.ID = ID;
         this.payload = response;
+        this.message = setMessage();
     }
 
     public Result(ResultStatus resultStatus, String ID) {
@@ -27,16 +29,19 @@ public class Result implements Serializable {
     public Result(ResultStatus resultStatus, List<Appointment> payload) {
         this.resultStatus = resultStatus;
         this.payload = payload;
+        this.message = setMessage();
     }
 
     public Result(ResultStatus resultStatus) {
         this.resultStatus = resultStatus;
+        this.message = setMessage();
     }
 
     public Result() {
         this.resultStatus = ResultStatus.FAILURE;
         this.ID = null;
         this.payload = null;
+        this.message = null;
     }
 
     public ResultStatus getResultStatus() {
@@ -63,6 +68,21 @@ public class Result implements Serializable {
         this.payload = payload;
     }
 
+    private String setMessage() {
+        switch (resultStatus) {
+            case FAILURE:
+                return "FAILURE! THIS OPERATION FAILED!";
+            case SUCCESS:
+                return "SUCCESS! THIS OPERATION SUCCEEDED";
+            default:
+                return null;
+        }
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     public byte[] getBytes(Result result) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -76,8 +96,9 @@ public class Result implements Serializable {
     public String toString() {
         return "Result {" +
                 "resultStatus = " + resultStatus +
-                ", ID = '" + ID + '\'' +
+                ", ID ='" + ID + '\'' +
                 ", payload = " + payload +
+                ", message = '" + message + '\'' +
                 '}';
     }
 }

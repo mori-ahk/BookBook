@@ -14,7 +14,7 @@ public class MainClient {
     public static String appointmentID;
     public static AppointmentType appointmentType;
     public static int capacity;
-
+    public static Result result;
     public static void main(String[] args) throws Exception {
 
         Registry registry = LocateRegistry.getRegistry(5555);
@@ -22,7 +22,7 @@ public class MainClient {
         System.out.print("Please enter your ID: ");
         String clientID = scanner.next();
         Client client = new Client(clientID);
-        Result result;
+
         Admin admin;
         Patient patient;
         int option;
@@ -59,6 +59,7 @@ public class MainClient {
             }
 
             callProperFunction(option, admin, patient);
+            parseResult(result);
         }
 
     }
@@ -119,26 +120,34 @@ public class MainClient {
         }
     }
 
-    private static void callProperFunction(int option, Admin admin, Patient patient) throws Exception {
+    private static Result callProperFunction(int option, Admin admin, Patient patient) throws Exception {
         switch (option) {
             case 1:
-                admin.addAppointment(appointmentID, appointmentType, capacity);
+                result = admin.addAppointment(appointmentID, appointmentType, capacity);
                 break;
             case 2:
-                admin.removeAppointment(appointmentID, appointmentType);
+                result = admin.removeAppointment(appointmentID, appointmentType);
                 break;
             case 3:
-                admin.listAppointmentAvailability(appointmentType);
+                result = admin.listAppointmentAvailability(appointmentType);
                 break;
             case 4:
-                patient.bookAppointment(patientID, appointmentID, appointmentType);
+                result = patient.bookAppointment(patientID, appointmentID, appointmentType);
                 break;
             case 5:
-                patient.getAppointmentSchedule(patientID);
+                result = patient.getAppointmentSchedule(patientID);
                 break;
             case 6:
-                patient.cancelAppointment(patientID, appointmentID, appointmentType);
+                result = patient.cancelAppointment(patientID, appointmentID, appointmentType);
                 break;
+            default:
+                return null;
         }
+        return null;
+    }
+
+    private static void parseResult(Result result) {
+        System.out.println(result.getMessage());
+        System.out.println(result.toString());
     }
 }
