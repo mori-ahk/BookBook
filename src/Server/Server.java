@@ -41,10 +41,20 @@ public class Server {
     }
 
     public Result addAppointment(Request request) {
-        Result result = new Result();
-        result.setID("Morteza");
-        result.setResultStatus(ResultStatus.SUCCESS);
-        return result;
+        Appointment appointment = request.getAppointment();
+        AppointmentType appointmentType = appointment.getAppointmentType();
+        if(database.containsKey(appointmentType)) {
+            if(database.get(appointmentType).containsKey(appointment.getID())) {
+                return new Result(ResultStatus.FAILURE);
+            } else {
+                database.get(appointmentType).put(appointment.getID(), appointment);
+                return new Result(ResultStatus.SUCCESS); }
+        } else {
+            HashMap<String, Appointment> newValue = new HashMap<>();
+            newValue.put(appointment.getID(), appointment);
+            database.put(appointmentType, newValue);
+            return new Result(ResultStatus.SUCCESS);
+        }
     }
 
     public Result removeAppointment(Request request) {
