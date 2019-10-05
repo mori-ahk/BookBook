@@ -30,11 +30,11 @@ public class UDPServer {
     Thread senderThread = new Thread(sender);
 
     public UDPServer(Connection connection, Request clientRequest, Server server) {
-        receiverThread.start();
-        senderThread.start();
         this.connection = connection;
         this.clientRequest = clientRequest;
         this.server = server;
+        receiverThread.start();
+        senderThread.start();
     }
 
     public Connection getConnection() {

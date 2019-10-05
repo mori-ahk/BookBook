@@ -1,6 +1,8 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Client implements Serializable {
     private String ID;
@@ -38,5 +40,19 @@ public class Client implements Serializable {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return Objects.equals(ID, client.ID) &&
+                location == client.location;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, location);
     }
 }

@@ -31,7 +31,7 @@ public class MainClient {
             while (true) {
                 System.out.println("Please choose an option from the list below:");
                 System.out.println("1) Add appointment\n2) Remove appointment\n3) List of appointment availability\n" +
-                        "4) Book appointment\n5) Cancel appointment\n6) Get appointment schedule");
+                        "4) Book appointment\n5) Get appointment schedule \n6) Cancel appointment");
                 option = scanner.nextInt();
                 if (option < 1 || option > 6) System.out.println("Please choose a valid option");
                 else if (!authenticateClient(client, option))

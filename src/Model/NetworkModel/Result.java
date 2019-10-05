@@ -93,6 +93,12 @@ public class Result implements Serializable {
         return bytes;
     }
 
+    public void toStringAppointments() {
+        for(Appointment appointment : payload) {
+            System.out.println(appointment.toString());
+        }
+    }
+
     @Override
     public String toString() {
         return "Result {" +

@@ -24,6 +24,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
     public Result addAppointment(String appointmentID, AppointmentType appointmentType, int capacity) throws RemoteException {
         Request clientRequest = new Request("addAppointment", new Appointment(appointmentType, appointmentID, capacity));
         Result result = null;
+
         if(server.getServerName().equals(clientRequest.getDestination().name())) {
             result = server.handleRequest(clientRequest);
         } else {
@@ -75,10 +76,18 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
     @Override
     public Result bookAppointment(String patientID, String appointmentID, AppointmentType appointmentType) throws RemoteException {
         Request clientRequest = new Request("bookAppointment", new Appointment(appointmentType, appointmentID), patientID);
+        return hitProperServer(clientRequest);
+    }
+
+    @Override
+    public Result cancelAppointment(String patientID, String appointmentID, AppointmentType appointmentType) throws RemoteException {
+        Request clientRequest = new Request("cancelAppointment", new Appointment(appointmentType, appointmentID), patientID);
         Result result = null;
         if(server.getServerName().equals(clientRequest.getDestination().name())) {
+            //call the local server
             result = server.handleRequest(clientRequest);
         } else {
+            //call udpServer
             setupUDPServer(clientRequest);
             result = udpServer.sendRequest(clientRequest);
         }
@@ -87,25 +96,27 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
     }
 
     @Override
-    public Result cancelAppointment(String patientID, String appointmentID, AppointmentType appointmentType) throws RemoteException {
-        Request clientRequest = new Request("cancelAppointment", new Appointment(appointmentType, appointmentID), patientID);
-        if(server.getServerName().equals(clientRequest.getDestination().name())) {
-            //call the local server
-        } else {
-            //call udpServer
-        }
-        return null;
-    }
-
-    @Override
     public Result getAppointmentSchedule(String patientID) throws RemoteException {
         Request clientRequest = new Request("getAppointmentSchedule", patientID);
-        if(server.getServerName().equals(clientRequest.getDestination().name())) {
-            //call the local server
-        } else {
-            //call udpServer
+        clientRequest.putDestination(patientID);
+        Result result = null;
+        ArrayList<Result> results = new ArrayList<>();
+        //call the local server
+        results.add(server.handleRequest(clientRequest));
+        //call upd servers
+        for(Server s : servers) {
+            if(s.getServerName().equals(server.getServerName())) continue;
+            udpServer = new UDPServer(getProperConnection(s), clientRequest, s);
+            results.add(udpServer.sendRequest(clientRequest));
         }
-        return null;
+
+        ArrayList<Appointment> allAppointments = new ArrayList<>();
+        for(Result r : results) {
+            allAppointments.addAll(r.getPayload());
+        }
+
+        result = new Result(ResultStatus.SUCCESS, allAppointments);
+        return result;
     }
 
 
@@ -134,6 +145,19 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
             }
         }
         return null;
+    }
+
+    private Result hitProperServer(Request clientRequest) {
+        Result result = null;
+        if(server.getServerName().equals(clientRequest.getDestination().name())) {
+            //call the local server
+            result = server.handleRequest(clientRequest);
+        } else {
+            //call udp server
+            setupUDPServer(clientRequest);
+            result = udpServer.sendRequest(clientRequest);
+        }
+        return result;
     }
 
     private void setupUDPServer(Request clientRequest) {

@@ -61,6 +61,18 @@ public class Request implements Serializable {
         this.patientID = patientID;
     }
 
+    public void putDestination(String patientID) {
+        switch (patientID.substring(0, 3)) {
+            case "MTL":
+                this.destination = RequestDestination.MTL;
+            case "QUE":
+                this.destination = RequestDestination.QUE;
+            case "SHE":
+                this.destination = RequestDestination.SHE;
+            default:
+                this.destination = RequestDestination.ALL;
+        }
+    }
 
     public RequestDestination setDestination(String appointmentID) {
         if(appointmentID == null) return RequestDestination.ALL;

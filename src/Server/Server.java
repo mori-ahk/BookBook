@@ -72,7 +72,7 @@ public class Server {
         return result;
     }
 
-    public Result bookAppointment(Request request) {
+    public synchronized Result bookAppointment(Request request) {
         Client patient = new Client(request.getPatientID());
         Appointment appointment = request.getAppointment();
         AppointmentType appointmentType = appointment.getAppointmentType();
@@ -93,10 +93,27 @@ public class Server {
     }
 
     public Result getAppointmentSchedule(Request request) {
-        return null;
+        Client patient = new Client(request.getPatientID());
+        Appointment appointment = request.getAppointment();
+        ArrayList<Appointment> appointmentList = new ArrayList<>();
+
+        for(HashMap.Entry<AppointmentType, HashMap<String, Appointment>> db : database.entrySet()) {
+            HashMap<String, Appointment> appointmentHashMap = db.getValue();
+            for(HashMap.Entry<String, Appointment> appointments : appointmentHashMap.entrySet()) {
+                for(Client c : appointments.getValue().getPatients()) {
+                    if(c.equals(patient)) appointmentList.add(appointments.getValue());
+                }
+            }
+        }
+
+        Result result = new Result();
+        result.setPayload(appointmentList);
+        return result;
     }
 
     public Result cancelAppointment(Request request) {
+
+
         return null;
     }
 

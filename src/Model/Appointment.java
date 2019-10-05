@@ -120,4 +120,6 @@ public class Appointment implements Serializable {
                 ", appointmentStatus = " + appointmentStatus +
                 '}';
     }
+
+
 }
