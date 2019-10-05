@@ -1,5 +1,6 @@
 import Model.Appointment;
 import Model.AppointmentType;
+import Model.NetworkModel.Request;
 import Router.Router;
 import Server.InternalCommunication.Connection;
 import Server.Server;
@@ -56,12 +57,12 @@ public class MainServer {
         HashMap<String, Appointment> value = new HashMap<>();
         value.put("MTLA100919", new Appointment(AppointmentType.PHYSICIAN, "MTLA100919", 3));
         database.put(AppointmentType.PHYSICIAN, value);
+        value = new HashMap<>();
         value.put("MTLE101119", new Appointment(AppointmentType.DENTAL, "MTLE101119", 1));
-        database.put(AppointmentType.PHYSICIAN, value);
+        database.put(AppointmentType.DENTAL, value);
+        value = new HashMap<>();
         value.put("MTLM051019", new Appointment(AppointmentType.SURGEON, "MTLM051019", 2));
-        database.put(AppointmentType.PHYSICIAN, value);
-        value.put("MTLM051019", new Appointment(AppointmentType.SURGEON, "MTLM051019", 2));
-        database.put(AppointmentType.PHYSICIAN, value);
+        database.put(AppointmentType.SURGEON, value);
         return database;
     }
 
@@ -69,26 +70,28 @@ public class MainServer {
         HashMap<AppointmentType, HashMap<String, Appointment>> database = new HashMap<>();
         HashMap<String, Appointment> value = new HashMap<>();
         value.put("QUEM100919", new Appointment(AppointmentType.DENTAL, "QUEA100919", 5));
-        database.put(AppointmentType.PHYSICIAN, value);
+        database.put(AppointmentType.DENTAL, value);
+        value = new HashMap<>();
         value.put("QUEA091119", new Appointment(AppointmentType.PHYSICIAN, "QUEA091119", 2));
         database.put(AppointmentType.PHYSICIAN, value);
+        value = new HashMap<>();
         value.put("QUEM051019", new Appointment(AppointmentType.SURGEON, "QUEM051019", 2));
-        database.put(AppointmentType.PHYSICIAN, value);
-        value.put("QUEM060819", new Appointment(AppointmentType.PHYSICIAN, "QUEM060819", 2));
-        database.put(AppointmentType.PHYSICIAN, value);
+        database.put(AppointmentType.SURGEON, value);
+        value = new HashMap<>();
+
         return database;
     }
 
     private static HashMap<AppointmentType, HashMap<String, Appointment>> initSHEDatabase() {
         HashMap<AppointmentType, HashMap<String, Appointment>> database = new HashMap<>();
         HashMap<String, Appointment> value = new HashMap<>();
-        value.put("SHEA100919", new Appointment(AppointmentType.DENTAL, "SHEA100919", 3));
-        database.put(AppointmentType.PHYSICIAN, value);
-        value.put("SHEE101119", new Appointment(AppointmentType.DENTAL, "SHEE101119", 1));
-        database.put(AppointmentType.PHYSICIAN, value);
         value.put("SHEM051019", new Appointment(AppointmentType.SURGEON, "SHEM051019", 2));
-        database.put(AppointmentType.PHYSICIAN, value);
+        database.put(AppointmentType.SURGEON, value);
+        value = new HashMap<>();
         value.put("SHEM051019", new Appointment(AppointmentType.DENTAL, "SHEM051019", 2));
+        database.put(AppointmentType.DENTAL, value);
+        value = new HashMap<>();
+        value.put("SHEM051019", new Appointment(AppointmentType.PHYSICIAN, "SHEE150219", 2));
         database.put(AppointmentType.PHYSICIAN, value);
         return database;
     }

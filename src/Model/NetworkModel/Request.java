@@ -63,6 +63,7 @@ public class Request implements Serializable {
 
 
     public RequestDestination setDestination(String appointmentID) {
+        if(appointmentID == null) return RequestDestination.ALL;
         switch (appointmentID.substring(0, 3)) {
             case "MTL":
                 return RequestDestination.MTL;

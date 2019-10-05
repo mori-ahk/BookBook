@@ -97,7 +97,6 @@ public class Result implements Serializable {
         return "Result {" +
                 "resultStatus = " + resultStatus +
                 ", ID ='" + ID + '\'' +
-                ", payload = " + payload +
                 ", message = '" + message + '\'' +
                 '}';
     }

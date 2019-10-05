@@ -30,6 +30,9 @@ public class Appointment implements Serializable {
         this.date = ID.substring(4);
     }
 
+    public Appointment(AppointmentType appointmentType) {
+        this.appointmentType = appointmentType;
+    }
 
     public String getLocation() {
         return location;
@@ -94,5 +97,15 @@ public class Appointment implements Serializable {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment { " +
+                "appointmentType = " + appointmentType +
+                ", ID = '" + ID + '\'' +
+                ", maxCapacity = " + maxCapacity +
+                ", appointmentStatus = " + appointmentStatus +
+                '}';
     }
 }

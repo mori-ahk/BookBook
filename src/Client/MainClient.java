@@ -1,6 +1,7 @@
 package Client;
 
 import Interfaces.*;
+import Model.Appointment;
 import Model.AppointmentType;
 import Model.Client;
 import Model.NetworkModel.Result;
@@ -149,5 +150,12 @@ public class MainClient {
     private static void parseResult(Result result) {
         System.out.println(result.getMessage());
         System.out.println(result.toString());
+        if(result.getPayload() != null) {
+            for(Appointment appointment : result.getPayload()) {
+                System.out.println(appointment.toString());
+            }
+        }
     }
+
+
 }

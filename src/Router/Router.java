@@ -26,7 +26,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
         Result result = null;
         if(server.getServerName().equals(clientRequest.getDestination().name())) {
             //call the local server
-            result = server.addAppointment(clientRequest);
+            result = server.handleRequest(clientRequest);
         } else {
             //call udp server
             setupUDPServer(clientRequest);
@@ -48,13 +48,24 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
 
     @Override
     public Result listAppointmentAvailability(AppointmentType appointmentType) throws RemoteException {
-        Request clientRequest = new Request("listAppointmentAvailability");
-        if(server.getServerName().equals(clientRequest.getDestination().name())) {
-            //call the local server
-        } else {
-            //call udpServer
+        Request clientRequest = new Request("listAppointmentAvailability", new Appointment(appointmentType));
+        Result result = new Result();
+        ArrayList<Result> results = new ArrayList<>();
+        results.add(server.handleRequest(clientRequest));
+        for(Server s : servers) {
+            if(s.getServerName().equals(server.getServerName())) continue;
+            udpServer = new UDPServer(getProperConnection(s), clientRequest, s);
+            results.add(udpServer.sendRequest(clientRequest));
         }
-        return null;
+
+        ArrayList<Appointment> allAppointments = new ArrayList<>();
+        for(Result r : results) {
+            allAppointments.addAll(r.getPayload());
+        }
+
+        result.setPayload(allAppointments);
+        result.setResultStatus(ResultStatus.SUCCESS);
+        return result;
     }
 
     @Override
@@ -99,6 +110,15 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
     private Connection getProperConnection(Request clientRequest){
         for (Connection c: server.getConnections()) {
             if(c.getName().equals(clientRequest.getDestination().name())) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private Connection getProperConnection(Server s) {
+        for(Connection c : server.getConnections()) {
+            if (c.getName().equals(s.getServerName())) {
                 return c;
             }
         }

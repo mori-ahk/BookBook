@@ -62,7 +62,14 @@ public class Server {
     }
 
     public Result listAppointmentAvailability(Request request) {
-        return null;
+        Result result = new Result();
+        HashMap<String, Appointment> appointmentHashMap = database.get(request.getAppointment().getAppointmentType());
+        ArrayList<Appointment> appointments = new ArrayList<>();
+        for(HashMap.Entry<String, Appointment> a : appointmentHashMap.entrySet()) {
+            appointments.add(a.getValue());
+        }
+        result.setPayload(appointments);
+        return result;
     }
 
     public Result bookAppointment(Request request) {
