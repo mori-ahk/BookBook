@@ -24,6 +24,7 @@ public class Result implements Serializable {
     public Result(ResultStatus resultStatus, String ID) {
         this.resultStatus = resultStatus;
         this.ID = ID;
+        this.message = setMessage();
     }
 
     public Result(ResultStatus resultStatus, List<Appointment> payload) {

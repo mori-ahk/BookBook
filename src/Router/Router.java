@@ -25,10 +25,8 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
         Request clientRequest = new Request("addAppointment", new Appointment(appointmentType, appointmentID, capacity));
         Result result = null;
         if(server.getServerName().equals(clientRequest.getDestination().name())) {
-            //call the local server
             result = server.handleRequest(clientRequest);
         } else {
-            //call udp server
             setupUDPServer(clientRequest);
             result  = udpServer.sendRequest(clientRequest);
         }
@@ -49,7 +47,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
     @Override
     public Result listAppointmentAvailability(AppointmentType appointmentType) throws RemoteException {
         Request clientRequest = new Request("listAppointmentAvailability", new Appointment(appointmentType));
-        Result result = new Result();
+        Result result;
         ArrayList<Result> results = new ArrayList<>();
         results.add(server.handleRequest(clientRequest));
         for(Server s : servers) {
@@ -63,8 +61,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
             allAppointments.addAll(r.getPayload());
         }
 
-        result.setPayload(allAppointments);
-        result.setResultStatus(ResultStatus.SUCCESS);
+        result = new Result(ResultStatus.SUCCESS, allAppointments);
         return result;
     }
 
