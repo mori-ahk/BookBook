@@ -3,16 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1de16875-73a5-47ab-8459-6fe16bc80bf3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment1/Model/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment1/Model/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment1/Model/NetworkModel/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment1/Model/NetworkModel/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/MainClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/NetworkModel/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/NetworkModel/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/NetworkModel/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/NetworkModel/Result.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Router/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router/Router.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/InternalCommunication/UDPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/InternalCommunication/UDPServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -141,7 +134,7 @@
       <workItem from="1570138967527" duration="12034000" />
       <workItem from="1570215852124" duration="378000" />
       <workItem from="1570221660846" duration="1862000" />
-      <workItem from="1570288990652" duration="7848000" />
+      <workItem from="1570288990652" duration="10260000" />
     </task>
     <servers />
   </component>
@@ -160,21 +153,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Router/Router.java</url>
-          <line>142</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Router/Router.java</url>
-          <line>132</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -112,9 +112,17 @@ public class Server {
     }
 
     public Result cancelAppointment(Request request) {
-
-
-        return null;
+        Client patient = new Client(request.getPatientID());
+        HashMap<String, Appointment> appointmentHashMap = database.get(request.getAppointment().getAppointmentType());
+        Appointment appointment = appointmentHashMap.get(request.getAppointment().getID());
+        for(Client c : appointment.getPatients()) {
+            if(c.equals(patient)) {
+                appointment.removePatient(patient);
+                return new Result(ResultStatus.SUCCESS);
+            }
+        }
+        
+        return new Result(ResultStatus.FAILURE);
     }
 
     public Result handleRequest(Request request) {

@@ -61,7 +61,7 @@ public class MainServer {
         value.put("MTLE101119", new Appointment(AppointmentType.DENTAL, "MTLE101119", 1));
         database.put(AppointmentType.DENTAL, value);
         value = new HashMap<>();
-        value.put("MTLM051019", new Appointment(AppointmentType.SURGEON, "MTLM051019", 2));
+        value.put("MTLA051019", new Appointment(AppointmentType.SURGEON, "MTLM051019", 2));
         database.put(AppointmentType.SURGEON, value);
         return database;
     }
@@ -69,7 +69,7 @@ public class MainServer {
     private static HashMap<AppointmentType, HashMap<String, Appointment>> initQUEDatabase() {
         HashMap<AppointmentType, HashMap<String, Appointment>> database = new HashMap<>();
         HashMap<String, Appointment> value = new HashMap<>();
-        value.put("QUEM100919", new Appointment(AppointmentType.DENTAL, "QUEA100919", 5));
+        value.put("QUEM100919", new Appointment(AppointmentType.DENTAL, "QUEM100919", 5));
         database.put(AppointmentType.DENTAL, value);
         value = new HashMap<>();
         value.put("QUEA091119", new Appointment(AppointmentType.PHYSICIAN, "QUEA091119", 2));
@@ -77,7 +77,6 @@ public class MainServer {
         value = new HashMap<>();
         value.put("QUEM051019", new Appointment(AppointmentType.SURGEON, "QUEM051019", 2));
         database.put(AppointmentType.SURGEON, value);
-        value = new HashMap<>();
 
         return database;
     }
