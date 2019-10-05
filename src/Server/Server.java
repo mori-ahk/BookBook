@@ -121,7 +121,7 @@ public class Server {
                 return new Result(ResultStatus.SUCCESS);
             }
         }
-        
+
         return new Result(ResultStatus.FAILURE);
     }
 

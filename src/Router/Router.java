@@ -1,11 +1,14 @@
 package Router;
 
 import Interfaces.*;
+import Logger.Logger;
 import Model.Appointment;
 import Model.NetworkModel.*;
 import Server.InternalCommunication.*;
 import Model.AppointmentType;
 import Server.Server;
+
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -139,6 +142,13 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
             setupUDPServer(clientRequest);
             result = udpServer.sendRequest(clientRequest);
         }
+        try {
+            Logger.getInstance().log(result, clientRequest, "Client.txt");
+//            Logger.getInstance().log(clientRequest, "Client.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 
