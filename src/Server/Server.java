@@ -45,15 +45,15 @@ public class Server {
         AppointmentType appointmentType = appointment.getAppointmentType();
         if(database.containsKey(appointmentType)) {
             if(database.get(appointmentType).containsKey(appointment.getID())) {
-                return new Result(ResultStatus.FAILURE);
+                return new Result(ResultStatus.FAILURE, "There is already an appointment with this appointment ID");
             } else {
                 database.get(appointmentType).put(appointment.getID(), appointment);
-                return new Result(ResultStatus.SUCCESS); }
+                return new Result(ResultStatus.SUCCESS, "Appointment has been successfully added"); }
         } else {
             HashMap<String, Appointment> newValue = new HashMap<>();
             newValue.put(appointment.getID(), appointment);
             database.put(appointmentType, newValue);
-            return new Result(ResultStatus.SUCCESS);
+            return new Result(ResultStatus.SUCCESS, "Appointment has been successfully added");
         }
     }
 
@@ -79,18 +79,16 @@ public class Server {
         AppointmentType appointmentType = appointment.getAppointmentType();
         String appointmentID = appointment.getID();
         if(database.containsKey(appointmentType)) {
-            if(database.get(appointmentType).containsKey(appointmentID)) {
-                if(database.get(appointmentType).get(appointmentID).getMaxCapacity() >
-                        database.get(appointmentType).get(appointmentID).getPatients().size()) {
-                    database.get(appointmentType).get(appointmentID).addPatient(patient);
-                    return new Result(ResultStatus.SUCCESS);
-                } else { return new Result(ResultStatus.FAILURE); }
-            } else {
-                return new Result(ResultStatus.FAILURE);
-            }
-        } else {
-            return new Result(ResultStatus.FAILURE);
-        }
+            if (database.get(appointmentType).containsKey(appointmentID)) {
+                if (!database.get(appointmentType).get(appointmentID).getPatients().contains(patient)) {
+                    if (database.get(appointmentType).get(appointmentID).getMaxCapacity() >
+                            database.get(appointmentType).get(appointmentID).getPatients().size()) {
+                        database.get(appointmentType).get(appointmentID).addPatient(patient);
+                        return new Result(ResultStatus.SUCCESS, "Appointment has been successfully booked.");
+                    } else { return new Result(ResultStatus.FAILURE, "There is no enough capacity for that appointment."); }
+                } else { return new Result(ResultStatus.FAILURE, "There is already a patient with the same appointment type and ID."); }
+            } else { return new Result(ResultStatus.FAILURE, "There is no appointment matching this appointment ID."); }
+        } else { return new Result(ResultStatus.FAILURE, "There is no appointment matching with this appointment type."); }
     }
 
     public Result getAppointmentSchedule(Request request) {
@@ -109,6 +107,8 @@ public class Server {
         Result result = new Result();
         result.setPayload(appointmentList);
         result.setResultStatus(ResultStatus.SUCCESS);
+        if(appointmentList.isEmpty()) result.setMessage("We did not find any appointments for this patient ID.");
+        else result.setMessage("We found" + appointmentList.size() + " appointments for this patient ID");
         return result;
     }
 
@@ -119,11 +119,11 @@ public class Server {
         for(Client c : appointment.getPatients()) {
             if(c.equals(patient)) {
                 appointment.removePatient(patient);
-                return new Result(ResultStatus.SUCCESS);
+                return new Result(ResultStatus.SUCCESS, "Appointment has been canceled for this patient ID.");
             }
         }
 
-        return new Result(ResultStatus.FAILURE);
+        return new Result(ResultStatus.FAILURE, "We did not find any appointment for this patient ID.");
     }
 
     public Result handleRequest(Request request) {

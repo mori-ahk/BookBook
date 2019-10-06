@@ -6,7 +6,6 @@ import Model.AppointmentType;
 import Model.Client;
 import Model.NetworkModel.Result;
 import java.rmi.registry.*;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 

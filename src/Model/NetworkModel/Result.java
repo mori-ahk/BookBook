@@ -18,24 +18,16 @@ public class Result implements Serializable {
         this.resultStatus = resultStatus;
         this.ID = ID;
         this.payload = response;
-        this.message = setMessage();
     }
 
-    public Result(ResultStatus resultStatus, String ID) {
+    public Result(ResultStatus resultStatus, String message) {
         this.resultStatus = resultStatus;
-        this.ID = ID;
-        this.message = setMessage();
+        this.message = message;
     }
 
     public Result(ResultStatus resultStatus, List<Appointment> payload) {
         this.resultStatus = resultStatus;
         this.payload = payload;
-        this.message = setMessage();
-    }
-
-    public Result(ResultStatus resultStatus) {
-        this.resultStatus = resultStatus;
-        this.message = setMessage();
     }
 
     public Result() {
@@ -69,15 +61,8 @@ public class Result implements Serializable {
         this.payload = payload;
     }
 
-    private String setMessage() {
-        switch (resultStatus) {
-            case FAILURE:
-                return "FAILURE! THIS OPERATION FAILED!";
-            case SUCCESS:
-                return "SUCCESS! THIS OPERATION SUCCEEDED";
-            default:
-                return null;
-        }
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getMessage() {

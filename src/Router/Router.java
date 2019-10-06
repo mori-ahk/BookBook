@@ -60,6 +60,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
         }
 
         result = new Result(ResultStatus.SUCCESS, allAppointments);
+        result.setMessage("we found " + allAppointments.size() + " appointments for appointment type " + appointmentType);
         return result;
     }
 
@@ -101,6 +102,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
         }
 
         result = new Result(ResultStatus.SUCCESS, allAppointments);
+        result.setMessage("we found " + allAppointments.size() + " appointments for patient ID: " + patientID);
         return result;
     }
 
