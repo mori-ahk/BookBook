@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1de16875-73a5-47ab-8459-6fe16bc80bf3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment1/Logger/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment1/Logger/Logger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment1/Router/Router.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment1/Router/Router.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/NetworkModel/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/NetworkModel/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment1/Server/InternalCommunication/UDPServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment1/Server/InternalCommunication/UDPServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment1/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment1/Server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Logger/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logger/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Router/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router/Router.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/InternalCommunication/UDPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/InternalCommunication/UDPServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -135,7 +140,7 @@
       <workItem from="1570215852124" duration="378000" />
       <workItem from="1570221660846" duration="1862000" />
       <workItem from="1570288990652" duration="10713000" />
-      <workItem from="1570310158267" duration="3440000" />
+      <workItem from="1570310158267" duration="7167000" />
     </task>
     <servers />
   </component>

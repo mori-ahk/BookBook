@@ -69,6 +69,7 @@ public class Server {
             appointments.add(a.getValue());
         }
         result.setPayload(appointments);
+        result.setResultStatus(ResultStatus.SUCCESS);
         return result;
     }
 
@@ -94,7 +95,6 @@ public class Server {
 
     public Result getAppointmentSchedule(Request request) {
         Client patient = new Client(request.getPatientID());
-        Appointment appointment = request.getAppointment();
         ArrayList<Appointment> appointmentList = new ArrayList<>();
 
         for(HashMap.Entry<AppointmentType, HashMap<String, Appointment>> db : database.entrySet()) {
@@ -108,6 +108,7 @@ public class Server {
 
         Result result = new Result();
         result.setPayload(appointmentList);
+        result.setResultStatus(ResultStatus.SUCCESS);
         return result;
     }
 

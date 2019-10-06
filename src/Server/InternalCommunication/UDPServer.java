@@ -1,5 +1,6 @@
 package Server.InternalCommunication;
 
+import Logger.Logger;
 import Model.Appointment;
 import Model.NetworkModel.Request;
 import Model.NetworkModel.Result;
@@ -66,6 +67,7 @@ public class UDPServer {
             socket.receive(reply);
             Result result = parseResult(reply);
             System.out.println("Reply received from the server with port number " + connection.getPort());
+            Logger.getInstance().log(result, clientRequest, "Server.txt");
             return result;
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());

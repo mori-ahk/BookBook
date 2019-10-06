@@ -144,7 +144,6 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
         }
         try {
             Logger.getInstance().log(result, clientRequest, "Client.txt");
-//            Logger.getInstance().log(clientRequest, "Client.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
