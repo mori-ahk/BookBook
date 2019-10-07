@@ -56,6 +56,8 @@ public class MainServer {
         HashMap<AppointmentType, HashMap<String, Appointment>> database = new HashMap<>();
         HashMap<String, Appointment> value = new HashMap<>();
         value.put("MTLA100919", new Appointment(AppointmentType.PHYSICIAN, "MTLA100919", 3));
+        value.put("MTLM051019", new Appointment(AppointmentType.PHYSICIAN, "MTLM051019", 5));
+        value.put("MTLE111219", new Appointment(AppointmentType.PHYSICIAN, "MTLE111219", 4));
         database.put(AppointmentType.PHYSICIAN, value);
         value = new HashMap<>();
         value.put("MTLE101119", new Appointment(AppointmentType.DENTAL, "MTLE101119", 1));
@@ -70,6 +72,7 @@ public class MainServer {
         HashMap<AppointmentType, HashMap<String, Appointment>> database = new HashMap<>();
         HashMap<String, Appointment> value = new HashMap<>();
         value.put("QUEM100919", new Appointment(AppointmentType.DENTAL, "QUEM100919", 5));
+        value.put("QUEE111019", new Appointment(AppointmentType.DENTAL, "QUEE111019", 6));
         database.put(AppointmentType.DENTAL, value);
         value = new HashMap<>();
         value.put("QUEA091119", new Appointment(AppointmentType.PHYSICIAN, "QUEA091119", 2));

@@ -87,6 +87,10 @@ public class Appointment implements Serializable {
         currentCapacity = maxCapacity - patients.size();
     }
 
+    public boolean doesHaveCapacity() {
+        return maxCapacity > patients.size();
+    }
+
     public int getMaxCapacity() {
         return maxCapacity;
     }

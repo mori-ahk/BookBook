@@ -32,12 +32,7 @@ public class Router extends UnicastRemoteObject implements Admin, Patient, Helpe
     @Override
     public Result removeAppointment(String appointmentID, AppointmentType appointmentType) throws RemoteException {
         Request clientRequest = new Request("removeAppointment", new Appointment(appointmentType, appointmentID));
-        if(server.getServerName().equals(clientRequest.getDestination().name())) {
-            //call the local server
-        } else {
-            //call udpServer
-        }
-        return null;
+        return hitProperServer(clientRequest);
     }
 
     @Override

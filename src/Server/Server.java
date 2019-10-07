@@ -58,7 +58,31 @@ public class Server {
     }
 
     public Result removeAppointment(Request request) {
-        return null;
+        ArrayList<Client> clients = new ArrayList<>();
+        Appointment appointment = request.getAppointment();
+        AppointmentType appointmentType = appointment.getAppointmentType();
+        String appointmentID = appointment.getID();
+        if(database.containsKey(appointmentType)) {
+            if(database.get(appointmentType).containsKey(appointmentID)) {
+                clients = database.get(appointmentType).get(appointmentID).getPatients();
+                database.get(appointmentType).remove(appointmentID);
+                HashMap<String, Appointment> appointmentHashMap = database.get(appointmentType);
+
+                for (HashMap.Entry<String, Appointment> appointmentEntry : appointmentHashMap.entrySet()) {
+                    if (isInFutre(appointmentEntry.getKey(), appointmentID)) {
+                        if (appointmentEntry.getValue().doesHaveCapacity()) {
+                            for(int i = 0; i < appointmentEntry.getValue().getCurrentCapacity() && clients.size() != 0; i++) {
+                                appointmentEntry.getValue().addPatient(clients.get(clients.size() - 1));
+                                clients.remove(clients.size() - 1);
+                                clients.trimToSize();
+                            }
+                        }
+                    }
+                }
+
+                return new Result(ResultStatus.SUCCESS, "The appointment has been removed successfully");
+            } else {  return new Result(ResultStatus.FAILURE, "There is no appointment with this appointment ID"); }
+        } else { return new Result(ResultStatus.FAILURE, "There is no appointment with this appointment type"); }
     }
 
     public Result listAppointmentAvailability(Request request) {
@@ -151,6 +175,25 @@ public class Server {
                 toReturn = null;
         }
         return toReturn;
+    }
+
+    private boolean isInFutre(String toAdd, String toRemove) {
+        int toAddYear = Integer.parseInt(toAdd.substring(toAdd.length() - 2));
+        int toAddMonth = Integer.parseInt(toAdd.substring(toAdd.length() - 4, toAdd.length() - 2));
+        int toAddDay = Integer.parseInt(toAdd.substring(toAdd.length() - 6, toAdd.length() - 4));
+
+        int toRemoveYear = Integer.parseInt(toRemove.substring(toRemove.length() - 2));
+        int toRemoveMonth = Integer.parseInt(toRemove.substring(toRemove.length() - 4, toRemove.length() - 2));
+        int toRemoveDay = Integer.parseInt(toRemove.substring(toRemove.length() - 6, toRemove.length() - 4));
+
+        if(toAddYear < toRemoveYear) return false;
+        else {
+            if(toAddMonth < toRemoveMonth) return false;
+            else {
+                if(toAddDay < toRemoveDay) return false;
+                else return true;
+            }
+        }
     }
 }
 

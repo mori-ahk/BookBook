@@ -1,0 +1,38 @@
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: removeAppointment which was made for patient with ID: null
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: removeAppointment which was made for patient with ID: null
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: removeAppointment which was made for patient with ID: null
+
+Result has been received with status of: FAILURE for request name: bookAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: QUEP1234
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: SHEP6543
+
+Result has been received with status of: SUCCESS for request name: removeAppointment which was made for patient with ID: null
+
+Result has been received with status of: FAILURE for request name: addAppointment which was made for patient with ID: null
+
+Result has been received with status of: SUCCESS for request name: addAppointment which was made for patient with ID: null
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: QUEP5432
+
+Result has been received with status of: SUCCESS for request name: cancelAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: SHEP1234
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: MTLP6544
+
+Result has been received with status of: SUCCESS for request name: removeAppointment which was made for patient with ID: null
+
+Result has been received with status of: SUCCESS for request name: bookAppointment which was made for patient with ID: MTLP7654
+
